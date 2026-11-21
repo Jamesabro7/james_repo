@@ -236,6 +236,46 @@ footer{padding:26px 0 44px;color:var(--on-navy-2);font-size:13px;background:var(
 
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s,transform .7s cubic-bezier(.2,.7,.2,1)}
 .reveal.in{opacity:1;transform:none}
+
+/* ---------- мобильная версия ---------- */
+.mlist{display:none}
+.mcard{border-top:1px solid var(--line);padding:14px 14px 12px;cursor:pointer}
+.mcard:first-child{border-top:0}
+.mcard.sel{background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.mcard .mh{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+.mcard .mh b{font-size:15px;line-height:1.25}
+.mcard .mh b small{display:block;font-weight:400;color:var(--ink-3);font-size:12px;margin-top:2px}
+.mcard .mh span{flex:none;font-weight:700;padding:5px 10px;border-radius:6px;font-size:15px;font-variant-numeric:tabular-nums}
+.mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+.mgrid div{border-radius:5px;padding:5px 6px;font-size:10px;letter-spacing:-.01em;line-height:1.2;min-width:0}
+.mgrid div em{display:block;font-style:normal;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mgrid div b{display:block;font-size:14px;font-variant-numeric:tabular-nums}
+.mgrid div.k{background:var(--surface-2);color:var(--ink-2)}
+.mfoot{margin-top:8px;font-size:12.5px;color:var(--ink-3)}
+.mfoot b{color:var(--ink-2);font-weight:600}
+@media (max-width:640px){
+  html{scroll-padding-top:104px}
+  .nav .wrap{flex-wrap:wrap;height:auto;padding-top:8px;gap:8px 10px}
+  .brand{flex:1 1 0;min-width:0}
+  .brand span{display:block;font-size:14px;overflow:hidden;text-overflow:ellipsis}
+  .nav nav{order:3;flex-basis:calc(100% + 32px);margin:0 -16px;padding:0 10px 6px;border-top:1px solid var(--navy-line);padding-top:6px}
+  .nav a{padding:6px 10px;font-size:13.5px}
+  .lang button{padding:6px 10px}
+  .icon-btn{width:32px;height:32px}
+  .hero{padding:32px 0 80px}
+  .tablewrap.hasm{display:none}
+  .mlist{display:block}
+  .chips{margin:0 -16px;padding:2px 16px 14px;scroll-padding:0 16px}
+  .sec-head p{font-size:15px}
+  .example{padding:18px}
+  .calc{gap:8px;flex-wrap:nowrap}
+  .calc b{font-size:20px}
+  .calc em{font-size:18px}
+  .pen-legend i{width:100px}
+  .p-top .big{font-size:52px}
+}
+@media (max-width:560px){.row,.axis-note{grid-template-columns:20px minmax(0,1fr) 34% 46px;gap:8px}.row{padding:8px 6px}.row .nm{font-size:13.5px}}
+@media (max-width:380px){.brand span{display:none}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -302,12 +342,12 @@ footer{padding:26px 0 44px;color:var(--on-navy-2);font-size:13px;background:var(
 
 <section id="tablica"><div class="wrap">
   <div class="sec-head reveal"><h2 data-t="tblH"></h2><p data-t="tblP"></p></div>
-  <div class="card reveal"><div class="tablewrap"><table id="tbl"><thead></thead><tbody></tbody><tfoot></tfoot></table></div></div>
+  <div class="card reveal"><div class="tablewrap hasm"><table id="tbl"><thead></thead><tbody></tbody><tfoot></tfoot></table></div><div class="mlist" id="mTbl"></div></div>
 </div></section>
 
 <section id="disbalans"><div class="wrap">
   <div class="sec-head reveal"><h2 data-t="penH"></h2><p id="penSub"></p></div>
-  <div class="card reveal"><div class="tablewrap"><table id="ptbl"><thead></thead><tbody></tbody><tfoot></tfoot></table></div><div class="pen-legend"><span data-t="penLo"></span><i id="penGrad"></i><span data-t="penHi"></span></div></div>
+  <div class="card reveal"><div class="tablewrap hasm"><table id="ptbl"><thead></thead><tbody></tbody><tfoot></tfoot></table></div><div class="mlist" id="mPen"></div><div class="pen-legend"><span data-t="penLo"></span><i id="penGrad"></i><span data-t="penHi"></span></div></div>
 </div></section>
 
 <section id="metodika"><div class="wrap">
@@ -354,7 +394,7 @@ ru:{
   indH:'Из чего складывается оценка',indP:n=>`28 исходных показателей: <b>${n}</b>. Точки — все 14 регионов, крупная — выбранный. Шкала развёрнута так, что <b>правее — всегда лучше</b>; вертикальная черта — среднее по стране.`,
   domOf:d=>`домен ${d} из 7`,worse:'← хуже',better:'лучше →',avg:'среднее',lessBetter:'меньше — лучше',
   tblH:'Сводная таблица',tblP:'Субиндексы семи доменов, итоговый MPI и проверка устойчивости: рейтинг, посчитанный в один шаг сразу по 28 показателям. Нажмите на заголовок, чтобы отсортировать.',
-  cName:'Регион',cPen:'Штраф',
+  cName:'Регион',cPen:'Штраф',mRk1:'ранг в 1 шаг',mDom:['Экономика','Труд','Чел. кап.','Инфраструкт.','Экология','Инклюзия','Институты'],mAvg:'Внутри, ср.',mPen:'штраф',mInter:'между доменами',
   penH:'Где теряются баллы: штрафы за дисбаланс',penSub:(r,d,v,r2,v2)=>`Сколько баллов снято за неравномерность внутри каждого домена (между его 4 показателями) и между семью доменами. Чем темнее ячейка, тем сильнее перекос. Наибольший локальный штраф — <b>${r}</b>, домен «${d}»: <b>${v}</b> балла. Самый ровный профиль между доменами — <b>${r2}</b> (${v2}).`,
   pAvg:'Внутри доменов, ср.',pInter:'Между доменами',pMain:'Главный перекос',penLo:'0 — ровно',penHi:'сильный перекос',wz:'огр.',wzT:(v,u)=>`Выброс: в расчёте значение ограничено границей 5–95-го перцентиля — ${v} ${u}`,cRk:'Ранг',cRk1:'Ранг в 1 шаг',tblAvg:'Среднее по 14 регионам',
   metH:'Как считается индекс',metP:'Метод Мацциотты — Парето, который применяет статистическая служба Италии (Istat), в двухшаговом варианте.',
@@ -383,7 +423,7 @@ uz:{
   indH:'Baho nimalardan tashkil topadi',indP:n=>`28 ta boshlangʻich koʻrsatkich: <b>${n}</b>. Nuqtalar — barcha 14 hudud, yirigi — tanlangan hudud. Shkala shunday joylashtirilganki, <b>oʻngroq — doim yaxshiroq</b>; tik chiziq — mamlakat boʻyicha oʻrtacha.`,
   domOf:d=>`7 domendan ${d}-si`,worse:'← yomonroq',better:'yaxshiroq →',avg:'oʻrtacha',lessBetter:'kami yaxshi',
   tblH:'Yigʻma jadval',tblP:'Yetti domen subindekslari, yakuniy MPI va barqarorlik tekshiruvi: 28 koʻrsatkich boʻyicha bir bosqichda hisoblangan reyting. Saralash uchun sarlavhani bosing.',
-  cName:'Hudud',cPen:'Jarima',
+  cName:'Hudud',cPen:'Jarima',mRk1:'1 bosqichda oʻrin',mDom:['Iqtisodiyot','Mehnat','Inson kap.','Infratuzilma','Ekologiya','Inklyuziya','Institutlar'],mAvg:'Ichida, oʻrt.',mPen:'jarima',mInter:'domenlar orasida',
   penH:'Ballar qayerda yoʻqotilmoqda: nomutanosiblik jarimalari',penSub:(r,d,v,r2,v2)=>`Har bir domen ichidagi (4 koʻrsatkich orasidagi) va yetti domen orasidagi notekislik uchun ayirilgan ballar. Katak qanchalik toʻq boʻlsa, nomutanosiblik shunchalik kuchli. Eng katta lokal jarima — <b>${r}</b>, «${d}» domeni: <b>${v}</b> ball. Domenlar orasida eng tekis profil — <b>${r2}</b> (${v2}).`,
   pAvg:'Domenlar ichida, oʻrt.',pInter:'Domenlar orasida',pMain:'Asosiy nomutanosiblik',penLo:'0 — tekis',penHi:'kuchli nomutanosiblik',wz:'cheg.',wzT:(v,u)=>`Chetga chiquvchi qiymat: hisobda 5–95-persentil chegarasi bilan cheklangan — ${v} ${u}`,cRk:'Oʻrin',cRk1:'1 bosqichda oʻrin',tblAvg:'14 hudud boʻyicha oʻrtacha',
   metH:'Indeks qanday hisoblanadi',metP:'Italiya statistika xizmati (Istat) qoʻllaydigan Matsiotta — Pareto usuli, ikki bosqichli variantda.',
@@ -556,6 +596,7 @@ function drawTable(){const c=cols.find(c=>c.k===sort.k);
   const s=[...R].sort((a,b)=>{const x=c.f(a),y=c.f(b);return (typeof x==='string'?x.localeCompare(y,LANG):x-y)*sort.dir});
   thead.querySelectorAll('th').forEach(th=>th.dataset.k===sort.k?th.setAttribute('aria-sort',sort.dir>0?'ascending':'descending'):th.removeAttribute('aria-sort'));
   tbody.innerHTML=s.map(r=>`<tr data-id="${r.id}" class="${r.id===state.id?'sel':''}">`+cols.map(c=>{const v=c.f(r);if(c.k==='name')return `<td>${v}</td>`;if(c.heat)return `<td class="h${c.strong?' strong':''}"><span style="background:${color(v)};color:${inkOn(v)}">${fmt(v)}</span></td>`;return `<td class="num">${fmt(v,c.d)}</td>`}).join('')+'</tr>').join('');
+  $('#mTbl').innerHTML=[...R].sort((a,b)=>b.mpi-a.mpi).map(r=>`<div class="mcard${r.id===state.id?' sel':''}" data-id="${r.id}"><div class="mh"><b>${ranks.mpi[r.id]}. ${r.name}<small>${T.mPen} ${fmt(r.pen,2)} · ${T.mRk1}: ${ranks.one[r.id]}</small></b><span style="background:${color(r.mpi)};color:${inkOn(r.mpi)}">${fmt(r.mpi)}</span></div><div class="mgrid">`+r.dom.map((v,d)=>`<div style="background:${color(v)};color:${inkOn(v)}"><em>${T.mDom[d]}</em><b>${fmt(v)}</b></div>`).join('')+`<div class="k"><em>MPI</em><b>${fmt(r.mpi)}</b></div></div></div>`).join('');
   $('#tbl tfoot').innerHTML=`<tr><td>${T.tblAvg}</td>`+cols.slice(1).map(c=>c.k.startsWith('rk')?'<td>—</td>':`<td>${fmt(mean(R.map(c.f)),c.d??1)}</td>`).join('')+'</tr>'}
 
 /* ---------- штрафы за дисбаланс ---------- */
@@ -569,9 +610,11 @@ function drawPen(){const cs=getComputedStyle(document.documentElement);PLO=hex(c
   $('#ptbl thead').innerHTML='<tr><th>'+T.cName+'</th>'+D.domShort.map(n=>`<th>${n}</th>`).join('')+`<th>${T.pAvg}</th><th>${T.pInter}</th><th style="text-align:left">${T.pMain}</th></tr>`;
   $('#ptbl tbody').innerHTML=s.map((r,k)=>`<tr data-id="${r.id}" class="${r.id===state.id?'sel':''}"><td>${k+1}. ${r.name}</td>`+r.dpen.map(penCell).join('')+`<td class="num">${fmt(avgIn(r),2)}</td>`+penCell(r.pen)+`<td class="lead">${D.domShort[main(r)]}</td></tr>`).join('');
   $('#ptbl tfoot').innerHTML=`<tr><td>${T.tblAvg}</td>`+D.domains.map((_,d)=>`<td>${fmt(mean(R.map(r=>r.dpen[d])),2)}</td>`).join('')+`<td>${fmt(mean(R.map(avgIn)),2)}</td><td>${fmt(mean(R.map(r=>r.pen)),2)}</td><td style="text-align:left">—</td></tr>`;
+  $('#mPen').innerHTML=s.map((r,k)=>{const c=penRGB(r.pen);return `<div class="mcard${r.id===state.id?' sel':''}" data-id="${r.id}"><div class="mh"><b>${k+1}. ${r.name}<small>${T.mInter}</small></b>`+penCell(r.pen).replace('<td class="h"><span','<span').replace('</span></td>','</span>')+`</div><div class="mgrid">`+r.dpen.map((v,d)=>penCell(v).replace('<td class="h"><span',`<div`).replace(/>([^<]*)<\/span><\/td>$/,`><em>${T.mDom[d]}</em><b>$1</b></div>`)).join('')+`<div class="k"><em>${T.mAvg}</em><b>${fmt(avgIn(r),2)}</b></div></div><div class="mfoot">${T.pMain}: <b>${D.domShort[main(r)]}</b></div></div>`}).join('');
   let top={v:-1};R.forEach(r=>r.dpen.forEach((v,d)=>{if(v>top.v)top={v,r,d}}));const ev=[...R].sort((a,b)=>a.pen-b.pen)[0];
   $('#penSub').innerHTML=T.penSub(top.r.name,D.domains[top.d],fmt(top.v,2),ev.name,fmt(ev.pen,2))}
 $('#ptbl tbody').onclick=e=>{const tr=e.target.closest('tr');if(tr)select(tr.dataset.id)};
+document.querySelectorAll('.mlist').forEach(m=>m.onclick=e=>{const c=e.target.closest('.mcard');if(c)select(c.dataset.id)});
 
 /* ---------- обновление ---------- */
 function drawMap(){const m=state.m;$('#mapTitle').textContent=mName(m);
@@ -591,6 +634,7 @@ function drawPanel(){const r=byId[state.id];$('#regSel').value=r.id;
   $('#exCalc').innerHTML=`<div><b>${fmt(r.M,2)}</b><small>${T.exM}</small></div><em>−</em><div><b>${fmt(r.pen,2)}</b><small>${T.exPen}</small></div><em>=</em><div><b style="color:var(--accent)">${fmt(r.mpi,2)}</b><small>${T.exRes}</small></div>`;
   Object.values(rowEl).forEach(b=>b.classList.remove('sel'));rowEl[r.id].classList.add('sel');
   tbody.querySelectorAll('tr').forEach(tr=>tr.classList.toggle('sel',tr.dataset.id===r.id));
+  document.querySelectorAll('.mcard').forEach(c=>c.classList.toggle('sel',c.dataset.id===r.id));
   document.querySelectorAll('#ptbl tbody tr').forEach(tr=>tr.classList.toggle('sel',tr.dataset.id===r.id))}
 function update(){drawMap();drawRating()}
 function select(id){state.id=id;drawMap();drawPanel();drawInd()}
